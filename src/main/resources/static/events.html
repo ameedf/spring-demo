@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Events handler</title>
+	<script src="events.js" type="text/javascript"></script>
+	<link href="events.css" rel="stylesheet">
+</head>
+<body onload="showAllEvents()">
+<div class="header">
+	<h2>Events List</h2>
+	<input type="text" id="description" placeholder="Event description...">
+	<input type="date" id="startDate">
+	<button id="addEventBtn" onclick="addEvent()" class="addBtn">Add</button>
+</div>
+
+<div id="eventsGrid" class="grid">
+
+</div>
+</body>
+</html>
