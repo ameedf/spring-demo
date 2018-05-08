@@ -25,7 +25,7 @@ public class EventsController {
     }
 
     @DeleteMapping("/rest/api/event/{eventId}")
-    public Long addEvent(@PathVariable("eventId") Long eventId) {
+    public Long deleteEvent(@PathVariable("eventId") Long eventId) {
         return services.removeEvent(eventId);
     }
 }
