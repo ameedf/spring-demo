@@ -6,10 +6,12 @@ const app = {
 function showAllEvents() {
 	const request = new XMLHttpRequest();
 	request.onreadystatechange = function () {
-		if (this.readyState === 4 && this.status === 200) {
-			log("All events: " + this.responseText);
-			app.events = JSON.parse(this.responseText);
-			createTable();
+		if (this.readyState === 4) {
+			let result = parseResponse(this.status, this.responseText);
+			if (result != null) {
+				app.events = result;
+				createTable();
+			}
 		}
 	};
 	request.open("GET", app.baseURL + "/all", true);
@@ -42,10 +44,13 @@ function createTable() {
 function removeEvent(eventId) {
 	const request = new XMLHttpRequest();
 	request.onreadystatechange = function () {
-		if (this.readyState === 4 && this.status === 200) {
-			log("Deleted event: " + this.responseText);
-			showAllEvents();
+		if (this.readyState === 4) {
+			let result = parseResponse(this.status, this.responseText);
+			if (result != null) {
+				log("Deleted event: " + result);
+			}
 		}
+		showAllEvents();
 	};
 	request.open("DELETE", app.baseURL + "/" + eventId, true);
 	request.send();
@@ -70,7 +75,10 @@ function addEvent() {
 	const xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function () {
 		if (this.readyState === 4 && this.status === 200) {
-			log("new id is " + this.responseText);
+			let result = parseResponse(this.status, this.responseText);
+			if (result != null) {
+				log("new id is " + result);
+			}
 			showAllEvents();
 		}
 	};
@@ -78,6 +86,16 @@ function addEvent() {
 	xhttp.setRequestHeader("Content-type", "application/json");
 	xhttp.send(JSON.stringify(event));
 	show(element('addEventBtn'));
+}
+
+function parseResponse(status, responseText) {
+	log(responseText);
+	let responseObject = JSON.parse(responseText);
+	if (status !== 200 || (responseObject.error && responseObject.error != null)) {
+		alert("Error: " + responseObject.error);
+		return null;
+	}
+	return responseObject.result;
 }
 
 function hide(element) {
