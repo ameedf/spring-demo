@@ -1,4 +1,4 @@
-We'll be using Eclipse Oxygen, Java 1.8 and Spring Boot 1.5.12 to create the "events" project we have once created using pure java and JAX-RS.
+We'll be using Eclipse Oxygen, Java 1.8 and Spring Boot 2.0.5 to create the "events" project we have once created using pure java and JAX-RS.
 The code is not complete, but it can be used as a starting point for your projects.
 <p>
 <b>ASSUMPTION</b>: you have your MySQL server up and it has the relevant tables
