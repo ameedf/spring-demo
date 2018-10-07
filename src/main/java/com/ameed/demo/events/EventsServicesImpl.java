@@ -21,7 +21,7 @@ public class EventsServicesImpl implements EventsServices {
 
     @Override
     public Long removeEvent(Long eventId) {
-        dao.delete(eventId);
+        dao.deleteById(eventId);
         return eventId;
     }
 }
